@@ -1,0 +1,24 @@
+<div class="container">
+    <h1>Scorekeeper</h1>
+
+    {{#if $players.length > 0}}
+    <ul class="players">
+        {{#each $players as player, i}}
+        <li>{{ player }}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>No players.</p>
+    {{/if}}
+</div>
+
+<style>
+</style>
+
+<script>
+
+export default {
+	components: {
+	}
+}
+</script>

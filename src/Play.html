@@ -1,0 +1,52 @@
+<div class="row">
+    <table class="twelve columns">
+        <thead>
+            <tr>
+                <th>Round #</th>
+                {{#each $players as player, i}}
+                <th>{{ player }}</th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each $rounds as round, i}}
+            <tr>
+                <td>{{ i+1 }}</td>
+                {{#each $players as player}}
+                <td>{{ round[player] }}</td>
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<script>
+
+export default {
+
+    oncreate() {
+        const rounds = this.store.get('rounds');
+
+        if (rounds.length < 1) {
+            this.nextRound();
+        }
+    },
+
+    methods: {
+        nextRound() {
+
+            const {rounds, players} = this.store.get();
+
+            const round = players.reduce((m, p) => {
+                m[p] = 0;
+                return m;
+            }, {});
+
+            rounds.push(round);
+
+            this.store.set({ rounds });
+        }
+    }
+}
+</script>

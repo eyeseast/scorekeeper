@@ -1,0 +1,57 @@
+<form ref:form class="row" on:submit="setPlayers(event)">
+
+    <div>
+        <input ref:newplayer type="text" name="players" placeholder="Add a player">
+        <button class="button button-primary">Add</button>
+    </div>
+    {{#each $players as player, i}}
+    <div>
+        <input type="text" value="{{ player }}" name="players">
+        <button type="button" class="button" title="Remove this player" on:click="removePlayer(i)">x</button>
+    </div>
+    {{/each}}
+
+    <div><input type="submit" value="start" on:click="start(event)"></div>
+</form>
+
+<style></style>
+
+<script>
+
+export default {
+
+    methods: {
+
+        setPlayers(e) {
+            e.preventDefault();
+
+            const {form, newplayer} = this.refs;
+            let players;
+
+            if (form.elements.players.length) {
+                players = Array.from(form.elements.players)
+                    .map(i => i.value)
+                    .filter(Boolean);
+            } else {
+                players = [form.elements.players.value];
+            }
+
+            this.store.set({ players });
+            newplayer.value = "";
+        },
+
+        removePlayer(index) {
+            const players = this.store.get('players')
+                .filter((p, i) => i !== index);
+            
+            this.store.set({ players });
+        },
+
+        start(e) {
+            // make sure players are set first
+            this.setPlayers.call(this, e);
+            this.store.set({ started: true });
+        }
+    }
+}
+</script>

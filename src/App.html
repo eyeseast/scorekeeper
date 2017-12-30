@@ -1,14 +1,10 @@
 <div class="container">
     <h1>Scorekeeper</h1>
 
-    {{#if $players.length > 0}}
-    <ul class="players">
-        {{#each $players as player, i}}
-        <li>{{ player }}</li>
-        {{/each}}
-    </ul>
+    {{#if $started}}
+        <Play />
     {{else}}
-    <p>No players.</p>
+        <ChoosePlayers />
     {{/if}}
 </div>
 
@@ -16,9 +12,13 @@
 </style>
 
 <script>
+import ChoosePlayers from './ChoosePlayers.html'
+import Play from './Play.html'
 
 export default {
 	components: {
+        ChoosePlayers,
+        Play
 	}
 }
 </script>

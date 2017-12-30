@@ -4,7 +4,9 @@ import useLocalStorage from './useLocalStorage.js';
 
 const store = new Store({
 	players: [],
-    round: 0
+    round: 0,
+    rounds: [],
+    started: false
 });
 
 window.store = store;

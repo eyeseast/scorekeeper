@@ -13,7 +13,9 @@
             <tr>
                 <td>{{ i+1 }}</td>
                 {{#each $players as player}}
-                <td>{{ round[player] }}</td>
+                <td>
+                    <input type="number" value="{{ round[player] }}">
+                </td>
                 {{/each}}
             </tr>
             {{/each}}

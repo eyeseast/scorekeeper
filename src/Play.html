@@ -17,7 +17,7 @@
                 </td>
                 {{#each $players as player}}
                 <td>
-                    <input type="number" value="{{ round[player] }}">
+                    <input type="number" value="{{ round[player] }}" on:change="updateScore(event, player, i)">
                 </td>
                 {{/each}}
 
@@ -73,6 +73,22 @@ export default {
                 .filter((r, i) => i !== index);
 
             this.store.set({ rounds });
+        },
+
+        updateScore(e, player, index) {
+            const rounds = this.store.get('rounds');
+            const value = +e.target.value;
+
+            const updated = rounds.map((round, i) => {
+
+                if (i === index) {
+                    round[player] = round[player] + value;
+                }
+
+                return round;
+            });
+
+            this.store.set({ rounds: updated })
         },
 
         unstart() {

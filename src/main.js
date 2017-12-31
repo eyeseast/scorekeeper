@@ -1,7 +1,6 @@
 import App from './App.html';
 import { Store } from 'svelte/store.js';
-import { totals } from './helpers.js';
-import useLocalStorage from './useLocalStorage.js';
+import { totals, useLocalStorage } from './helpers.js';
 
 const store = new Store({
 	players: [],

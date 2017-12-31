@@ -1,4 +1,8 @@
 <div class="row">
+    <Media ref:media query="(orientation: portrait)">
+        <p>This is a portrait</p>
+    </Media>
+
     <table class="twelve columns">
         <thead>
             <tr>
@@ -50,9 +54,12 @@ button.x-round {
 </style>
 
 <script>
+import Media from './Media.html';
 import { totals } from './helpers.js';
 
 export default {
+
+    components: { Media },
 
     oncreate() {
         const rounds = this.store.get('rounds');

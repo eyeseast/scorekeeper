@@ -1,0 +1,44 @@
+<!-- only render if query matches current media -->
+{{#if matches}}
+<slot></slot>
+{{/if}}
+
+<script>
+export default {
+
+    data() {
+        return {
+            matches: true,
+            query: null
+        }
+    },
+
+    oncreate() {
+        
+        const {query} = this.get();
+
+        this.updateMatches = this.updateMatches.bind(this);
+        
+        this.mediaQueryList = window.matchMedia(query);
+        this.mediaQueryList.addListener(this.updateMatches);
+
+        this.updateMatches();
+    },
+
+    ondestroy() {
+        if (this.mediaQueryList) {
+            this.mediaQueryList.removeListener(this.updateMatches);
+        }
+    },
+
+    methods: {
+        updateMatches(e) {
+            if (this.mediaQueryList) {
+                this.set({ matches: this.mediaQueryList.matches });
+            }
+
+            console.log(e);
+        }
+    }
+}
+</script>

@@ -6,22 +6,40 @@
                 {{#each $players as player, i}}
                 <th>{{ player }}</th>
                 {{/each}}
+                <th>Discard</th>
             </tr>
         </thead>
         <tbody>
             {{#each $rounds as round, i}}
             <tr>
-                <td>{{ i+1 }}</td>
+                <td>
+                    {{ i+1 }} 
+                </td>
                 {{#each $players as player}}
                 <td>
                     <input type="number" value="{{ round[player] }}">
                 </td>
                 {{/each}}
+
+                <td>
+                    <button class="x-round button" on:click="removeRound(i)">x</button>
+                </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+
+    <div>
+        <button class="button button-primary" on:click="nextRound()">Next round</button>
+        <button class="button" on:click="unstart()">Change players</button>
+    </div>
 </div>
+
+<style>
+button.x-round {
+
+}
+</style>
 
 <script>
 
@@ -48,6 +66,17 @@ export default {
             rounds.push(round);
 
             this.store.set({ rounds });
+        },
+
+        removeRound(index) {
+            const rounds = this.store.get('rounds')
+                .filter((r, i) => i !== index);
+
+            this.store.set({ rounds });
+        },
+
+        unstart() {
+            this.store.set({ started: false });
         }
     }
 }

@@ -2,9 +2,9 @@
     <h1>Scorekeeper</h1>
 
     {{#if $started}}
-        <Play />
+        <Play ref:play />
     {{else}}
-        <ChoosePlayers />
+        <ChoosePlayers ref:choose />
     {{/if}}
 </div>
 

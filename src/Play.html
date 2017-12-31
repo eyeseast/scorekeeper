@@ -17,7 +17,7 @@
                 </td>
                 {{#each $players as player}}
                 <td>
-                    <input type="number" value="{{ round[player] }}" on:change="updateScore(event, player, i)">
+                    <input type="number" value="{{ round[player] }}" on:input="updateScore(event, player, i)">
                 </td>
                 {{/each}}
 
@@ -26,12 +26,20 @@
                 </td>
             </tr>
             {{/each}}
+
+            <tr class="totals">
+                <td>Totals:</td>
+                {{#each $players as player}}
+                <td>{{ totals[player] || 0 }}</td>
+                {{/each}}
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
     <div>
         <button class="button button-primary" on:click="nextRound()">Next round</button>
-        <button class="button" on:click="unstart()">Change players</button>
+        <button class="button" on:click="store.set({ started: false })">Change players</button>
     </div>
 </div>
 
@@ -42,6 +50,7 @@ button.x-round {
 </style>
 
 <script>
+import { totals } from './helpers.js';
 
 export default {
 
@@ -51,6 +60,10 @@ export default {
         if (rounds.length < 1) {
             this.nextRound();
         }
+    },
+
+    computed: {
+        totals: ($rounds) => totals($rounds)
     },
 
     methods: {
@@ -76,23 +89,20 @@ export default {
         },
 
         updateScore(e, player, index) {
+
             const rounds = this.store.get('rounds');
             const value = +e.target.value;
 
             const updated = rounds.map((round, i) => {
 
                 if (i === index) {
-                    round[player] = round[player] + value;
+                    round[player] = value;
                 }
 
                 return round;
             });
 
-            this.store.set({ rounds: updated })
-        },
-
-        unstart() {
-            this.store.set({ started: false });
+            this.store.set({ rounds: updated });
         }
     }
 }

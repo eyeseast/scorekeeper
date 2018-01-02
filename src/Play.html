@@ -1,8 +1,20 @@
 <div class="row">
-    <Media ref:media query="(orientation: portrait)">
-        <p>This is a portrait</p>
+    <Media ref:media query={{ json2mq({ maxWidth: 600 }) }}>
+        <div class="twelve columns">
+            {{#each $rounds as round, i}}
+            <dl>
+                <dt>Round {{ i+1 }}</dt>
+                <dd></dd>
+
+                {{#each $players as player}}
+                <dt>{{ player }}</dt>
+                {{/each}}
+            </dl>
+            {{/each}}
+        </div>
     </Media>
 
+    <Media query={{ json2mq({ minWidth: 601 }) }}>
     <table class="twelve columns">
         <thead>
             <tr>
@@ -40,7 +52,7 @@
             </tr>
         </tbody>
     </table>
-
+    </Media>
     <div>
         <button class="button button-primary" on:click="nextRound()">Next round</button>
         <button class="button" on:click="store.set({ started: false })">Change players</button>
@@ -54,6 +66,7 @@ button.x-round {
 </style>
 
 <script>
+import json2mq from 'json2mq';
 import Media from './Media.html';
 import { totals } from './helpers.js';
 
@@ -71,6 +84,10 @@ export default {
 
     computed: {
         totals: ($rounds) => totals($rounds)
+    },
+
+    helpers: {
+        json2mq
     },
 
     methods: {

@@ -12,6 +12,7 @@
     "rollup-plugin-svelte": "^3.1.0",
     "rollup-plugin-uglify": "^2.0.1",
     "serve": "^6.0.6",
+    "svelte": "^1.50.1",
     "svelte-transitions": "^1.1.1"
   },
   "scripts": {

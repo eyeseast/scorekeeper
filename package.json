@@ -22,5 +22,18 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test": "run-p --race dev cy:run"
-  }
+  },
+  "description": "This is a simple demonstration of a [Svelte](https://svelte.technology) app using [svelte/store](https://svelte.technology/guide#state-management). It lives at https://github.com/sveltejs/template-store.",
+  "main": "null",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyeseast/scorekeeper.git"
+  },
+  "author": "Chris Amico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eyeseast/scorekeeper/issues"
+  },
+  "homepage": "https://github.com/eyeseast/scorekeeper#readme"
 }

@@ -17,8 +17,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "dev": "serve public & rollup -c -w",
-    "start": "serve public",
+    "dev": "serve docs & rollup -c -w",
+    "start": "serve docs",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test": "run-p --race dev cy:run"

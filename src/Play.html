@@ -1,13 +1,22 @@
 <div class="row">
-    <Media ref:media query={{ json2mq({ maxWidth: 600 }) }}>
+    <Media query={{ json2mq({ maxWidth: 600 }) }}>
         <div class="twelve columns">
             {{#each $rounds as round, i}}
-            <dl>
-                <dt>Round {{ i+1 }}</dt>
-                <dd></dd>
 
+            <header>
+                <h2>Round {{ i+1 }}</h2>
+                <button class="x-round button" on:click="removeRound(i)">X</button>
+            </header>
+
+            <dl>
                 {{#each $players as player}}
-                <dt>{{ player }}</dt>
+                <dt>
+                    <label>
+                        <span>{{ player }}</span>
+                        <input type="number" value="{{ round[player] }}" 
+                            on:input="updateScore(event, player, i)">
+                    </label>
+                </dt>
                 {{/each}}
             </dl>
             {{/each}}
@@ -53,6 +62,7 @@
         </tbody>
     </table>
     </Media>
+
     <div>
         <button class="button button-primary" on:click="nextRound()">Next round</button>
         <button class="button" on:click="store.set({ started: false })">Change players</button>
@@ -60,8 +70,29 @@
 </div>
 
 <style>
-button.x-round {
+header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;    
+}
 
+h2 {
+    font-size: 2em;
+}
+
+button.x-round {
+    background: none;
+    cursor: pointer;
+    border: none;
+    font-size: 1em;
+}
+
+dt label {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;    
 }
 </style>
 

@@ -14,7 +14,7 @@ window.store = store;
 useLocalStorage(store, 'scorekeeper');
 
 const app = new App({
-	target: document.body,
+	target: document.querySelector('#app'),
 	store
 });
 

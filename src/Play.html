@@ -8,9 +8,9 @@
                 <button class="x-round button" on:click="removeRound(i)">X</button>
             </header>
 
-            <dl>
+            <dl class="players">
                 {#each $players as player}
-                <dt>
+                <dt class="player {player}">
                     <label>
                         <span>{ player }</span>
                         <input type="number" value="{ round[player] }" 
@@ -21,6 +21,17 @@
             </dl>
             {/each}
         </div>
+
+        <div class="totals twelve columns">
+        <h2>Totals:</h2>
+            <ul>
+                {#each $players as player}
+                <li><strong>{player}</strong>:
+                {totals[player] || 0}</li>
+                {/each}
+            </ul>
+        </div>
+
     </Media>
 
     <Media query={ json2mq({ minWidth: 601 }) }>

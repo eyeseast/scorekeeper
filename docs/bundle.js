@@ -1,2 +1,1947 @@
-var app=function(){"use strict";function t(){}function e(t){for(var e,n,r=1,s=arguments.length;r<s;r++){n=arguments[r];for(e in n)t[e]=n[e]}return t}function n(t,e){e.appendChild(t)}function r(t,e,n){e.insertBefore(t,n)}function s(t){t.parentNode.removeChild(t)}function o(t){for(var e=0;e<t.length;e+=1)t[e]&&t[e].d()}function i(){return document.createDocumentFragment()}function a(t){return document.createElement(t)}function u(t){return document.createTextNode(t)}function c(){return document.createComment("")}function l(t,e,n){t.addEventListener(e,n,!1)}function h(t,e,n){t.removeEventListener(e,n,!1)}function f(){return Object.create(null)}function d(e){this.destroy=t,this.fire("destroy"),this.set=this.get=t,!1!==e&&this._fragment.u(),this._fragment.d(),this._fragment=this._state=null}function p(t,e){return t!==e||t&&"object"==typeof t||"function"==typeof t}function _(t,e,n,r,s){for(var o in e)if(n[o]){var i=r[o],a=s[o],u=e[o];if(u)for(var c=0;c<u.length;c+=1){var l=u[c];l.__calling||(l.__calling=!0,l.call(t,i,a),l.__calling=!1)}}}function v(t){return t?this._state[t]:this._state}function m(t,e){t._observers={pre:f(),post:f()},t._handlers=f(),t._bind=e._bind,t.options=e,t.root=e.root||t,t.store=t.root.store||e.store}function g(t,e,n){var r=n&&n.defer?this._observers.post:this._observers.pre;return(r[t]||(r[t]=[])).push(e),n&&!1===n.init||(e.__calling=!0,e.call(this,this._state[t]),e.__calling=!1),{cancel:function(){var n=r[t].indexOf(e);~n&&r[t].splice(n,1)}}}function y(t){for(;t&&t.length;)t.pop()()}function $(){this.store._remove(this)}var b={destroy:d,get:v,fire:function(t,e){var n=t in this._handlers&&this._handlers[t].slice();if(n)for(var r=0;r<n.length;r+=1)n[r].call(this,e)},observe:g,on:function(t,e){if("teardown"===t)return this.on("destroy",e);var n=this._handlers[t]||(this._handlers[t]=[]);return n.push(e),{cancel:function(){var t=n.indexOf(e);~t&&n.splice(t,1)}}},set:function(t){this._set(e({},t)),this.root._lock||(this.root._lock=!0,y(this.root._beforecreate),y(this.root._oncreate),y(this.root._aftercreate),this.root._lock=!1)},teardown:d,_recompute:t,_set:function(t){var n=this._state,r={},s=!1;for(var o in t)p(t[o],n[o])&&(r[o]=s=!0);s&&(this._state=e({},n,t),this._recompute(r,this._state),this._bind&&this._bind(r,this._state),this._fragment&&(_(this,this._observers.pre,r,this._state,n),this._fragment.p(r,this._state),_(this,this._observers.post,r,this._state,n)))},_mount:function(t,e){this._fragment.m(t,e)},_unmount:function(){this._fragment&&this._fragment.u()}};function x(t,e,o,i,c){var f,d,p,_,v;return{c:function(){f=a("div"),d=a("input"),_=u("\n        "),(v=a("button")).textContent="x",this.h()},h:function(){d.type="text",d.value=p=o,d.name="players",v.type="button",v.className="button",v.title="Remove this player",l(v,"click",w),v._svelte={component:c,$players:e,i:i}},m:function(t,e){r(f,t,e),n(d,f),n(_,f),n(v,f)},p:function(t,e,n,r,s){t.$players&&p!==(p=r)&&(d.value=p),v._svelte.$players=n,v._svelte.i=s},u:function(){s(f)},d:function(){h(v,"click",w)}}}function w(t){var e=this._svelte.component,n=(this._svelte.$players,this._svelte.i);e.removePlayer(n)}function C(t){m(this,t),this.refs={},this._state=e(this.store._init(["players"]),t.data),this.store._add(this,["players"]),this._handlers.destroy=[$],this._fragment=function(t,e){for(var i,c,f,d,p,_,v,m,g,y=t.$players,$=[],b=0;b<y.length;b+=1)$[b]=x(0,y,y[b],b,e);function w(t){e.start(t)}function C(t){e.setPlayers(t)}return{c:function(){i=a("form"),c=a("div"),f=a("input"),d=u("\n        "),(p=a("button")).textContent="Add",_=u("\n    ");for(var t=0;t<$.length;t+=1)$[t].c();v=u("\n\n    "),m=a("div"),g=a("input"),this.h()},h:function(){f.type="text",f.name="players",f.placeholder="Add a player",p.className="button button-primary",g.type="submit",g.value="start",l(g,"click",w),i.className="row",l(i,"submit",C)},m:function(t,s){r(i,t,s),n(c,i),n(f,c),e.refs.newplayer=f,n(d,c),n(p,c),n(_,i);for(var o=0;o<$.length;o+=1)$[o].m(i,null);n(v,i),n(m,i),n(g,m),e.refs.form=i},p:function(t,n){var r=n.$players;if(t.$players){for(var s=0;s<r.length;s+=1)$[s]?$[s].p(t,n,r,r[s],s):($[s]=x(0,r,r[s],s,e),$[s].c(),$[s].m(i,v));for(;s<$.length;s+=1)$[s].u(),$[s].d();$.length=r.length}},u:function(){s(i);for(var t=0;t<$.length;t+=1)$[t].u()},d:function(){e.refs.newplayer===f&&(e.refs.newplayer=null),o($),h(g,"click",w),h(i,"submit",C),e.refs.form===i&&(e.refs.form=null)}}}(this._state,this),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null))}e(C.prototype,{setPlayers:function(t){t.preventDefault();var e,n=this.refs,r=n.form,s=n.newplayer;e=r.elements.players.length?Array.from(r.elements.players).map(function(t){return t.value}).filter(Boolean):[r.elements.players.value],this.store.set({players:e}),s.value=""},removePlayer:function(t){var e=this.store.get("players").filter(function(e,n){return n!==t});this.store.set({players:e})},start:function(t){this.setPlayers.call(this,t),this.store.set({started:!0})}},b);var k=function(t){return t.replace(/[A-Z]/g,function(t){return"-"+t.toLowerCase()}).toLowerCase()},N=function(t){var e="",n=Object.keys(t);return n.forEach(function(r,s){var o=t[r];r=k(r),/[height|width]$/.test(r)&&"number"==typeof o&&(o+="px");e+=!0===o?r:!1===o?"not "+r:"("+r+": "+o+")",s<n.length-1&&(e+=" and ")}),e},L=function(t){var e="";return"string"==typeof t?t:t instanceof Array?(t.forEach(function(n,r){e+=N(n),r<t.length-1&&(e+=", ")}),e):N(t)};function P(){this.mediaQueryList&&this.mediaQueryList.removeListener(this.updateMatches)}function S(e,n){var o,i,a=n._slotted.default;return{c:t,m:function(t,e){a&&(r(o||(o=c()),t,e),r(a,t,e),r(i||(i=c()),t,e))},u:function(){a&&(!function(t,e,n){for(;t.nextSibling&&t.nextSibling!==e;)n.appendChild(t.parentNode.removeChild(t.nextSibling))}(o,i,a),s(o),s(i))},d:t}}function R(t){m(this,t),this._state=e({matches:!0,query:null},t.data),this._handlers.destroy=[P],this._slotted=t.slots||{};var n=function(){var t=this.get().query;this.updateMatches=this.updateMatches.bind(this),this.mediaQueryList=window.matchMedia(t),this.mediaQueryList.addListener(this.updateMatches),this.updateMatches()}.bind(this);t.root?this.root._oncreate.push(n):this._oncreate=[n],this.slots={},this._fragment=function(t,e){var n,o=t.matches&&S(0,e);return{c:function(){o&&o.c(),n=c()},m:function(t,e){o&&o.m(t,e),r(n,t,e)},p:function(t,r){r.matches?o||((o=S(0,e)).c(),o.m(n.parentNode,n)):o&&(o.u(),o.d(),o=null)},u:function(){o&&o.u(),s(n)},d:function(){o&&o.d()}}}(this._state,this),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null),y(this._oncreate))}e(R.prototype,{updateMatches:function(t){this.mediaQueryList&&this.set({matches:this.mediaQueryList.matches})}},b);function E(t){e="svelte-1032740323",n="",t.setAttribute(e,n);var e,n}function M(t,e,i,c,f){for(var d,p,_,v,m,g,y,$,b=c+1,x=t.$players,w=[],C=0;C<x.length;C+=1)w[C]=O(t,e,i,c,x,x[C],C,f);return{c:function(){d=a("header"),p=a("h2"),_=u("Round "),v=u(b),m=u("\n                "),(g=a("button")).textContent="X",y=u("\n\n            "),$=a("dl");for(var t=0;t<w.length;t+=1)w[t].c();this.h()},h:function(){E(d),E(p),E(g),g.className="x-round button",l(g,"click",W),g._svelte={component:f,$rounds:e,i:c}},m:function(t,e){r(d,t,e),n(p,d),n(_,p),n(v,p),n(m,d),n(g,d),r(y,t,e),r($,t,e);for(var s=0;s<w.length;s+=1)w[s].m($,null)},p:function(t,e,n,r,s){g._svelte.$rounds=n,g._svelte.i=s;var o=e.$players;if(t.$players||t.$rounds){for(var i=0;i<o.length;i+=1)w[i]?w[i].p(t,e,n,r,s,o,o[i],i):(w[i]=O(e,n,r,s,o,o[i],i,f),w[i].c(),w[i].m($,null));for(;i<w.length;i+=1)w[i].u(),w[i].d();w.length=o.length}},u:function(){s(d),s(y),s($);for(var t=0;t<w.length;t+=1)w[t].u()},d:function(){h(g,"click",W),o(w)}}}function O(t,e,o,i,c,f,d,p){var _,v,m,g,y,$,b,x=f;return{c:function(){_=a("dt"),v=a("label"),m=a("span"),g=u(x),y=u("\n                        "),$=a("input"),this.h()},h:function(){E(_),E(v),$.type="number",$.value=b=o[f],l($,"input",j),$._svelte={component:p,$players:c,player_index:d,$rounds:e,i:i}},m:function(t,e){r(_,t,e),n(v,_),n(m,v),n(g,m),n(y,v),n($,v)},p:function(t,e,n,r,s,o,i,a){t.$players&&x!==(x=i)&&(g.data=x),(t.$rounds||t.$players)&&b!==(b=r[i])&&($.value=b),$._svelte.$players=o,$._svelte.player_index=a,$._svelte.$rounds=n,$._svelte.i=s},u:function(){s(_)},d:function(){h($,"input",j)}}}function q(e,o,i,c,l){var h,f,d=i;return{c:function(){h=a("th"),f=u(d)},m:function(t,e){r(h,t,e),n(f,h)},p:function(t,e,n,r,s){t.$players&&d!==(d=r)&&(f.data=d)},u:function(){s(h)},d:t}}function A(t,e,i,c,f){for(var d,p,_,v,m,g,y,$=c+1,b=t.$players,x=[],w=0;w<b.length;w+=1)x[w]=H(t,e,i,c,b,b[w],w,f);return{c:function(){d=a("tr"),p=a("td"),_=u($),v=u("\n                ");for(var t=0;t<x.length;t+=1)x[t].c();m=u("\n\n                "),g=a("td"),(y=a("button")).textContent="x",this.h()},h:function(){E(y),y.className="x-round button",l(y,"click",B),y._svelte={component:f,$rounds_1:e,i:c}},m:function(t,e){r(d,t,e),n(p,d),n(_,p),n(v,d);for(var s=0;s<x.length;s+=1)x[s].m(d,null);n(m,d),n(g,d),n(y,g)},p:function(t,e,n,r,s){var o=e.$players;if(t.$rounds||t.$players){for(var i=0;i<o.length;i+=1)x[i]?x[i].p(t,e,n,r,s,o,o[i],i):(x[i]=H(e,n,r,s,o,o[i],i,f),x[i].c(),x[i].m(d,m));for(;i<x.length;i+=1)x[i].u(),x[i].d();x.length=o.length}y._svelte.$rounds_1=n,y._svelte.i=s},u:function(){s(d);for(var t=0;t<x.length;t+=1)x[t].u()},d:function(){o(x),h(y,"click",B)}}}function H(t,e,o,i,u,c,f,d){var p,_,v;return{c:function(){p=a("td"),_=a("input"),this.h()},h:function(){_.type="number",_.value=v=o[c],l(_,"input",D),_._svelte={component:d,$players:u,player_index:f,$rounds_1:e,i:i}},m:function(t,e){r(p,t,e),n(_,p)},p:function(t,e,n,r,s,o,i,a){(t.$rounds||t.$players)&&v!==(v=r[i])&&(_.value=v),_._svelte.$players=o,_._svelte.player_index=a,_._svelte.$rounds_1=n,_._svelte.i=s},u:function(){s(p)},d:function(){h(_,"input",D)}}}function Q(e,o,i,c,l){var h,f,d=e.totals[i]||0;return{c:function(){h=a("td"),f=u(d)},m:function(t,e){r(h,t,e),n(f,h)},p:function(t,e,n,r,s){(t.totals||t.$players)&&d!==(d=e.totals[r]||0)&&(f.data=d)},u:function(){s(h)},d:t}}function W(t){var e=this._svelte.component,n=(this._svelte.$rounds,this._svelte.i);e.removeRound(n)}function j(t){var e=this._svelte.component,n=this._svelte.$players[this._svelte.player_index],r=(this._svelte.$rounds,this._svelte.i);e.updateScore(t,n,r)}function D(t){var e=this._svelte.component,n=this._svelte.$players[this._svelte.player_index],r=(this._svelte.$rounds_1,this._svelte.i);e.updateScore(t,n,r)}function B(t){var e=this._svelte.component,n=(this._svelte.$rounds_1,this._svelte.i);e.removeRound(n)}function I(t){m(this,t),this._state=e(this.store._init(["rounds","players"]),t.data),this.store._add(this,["rounds","players"]),this._recompute({$rounds:1},this._state),this._handlers.destroy=[$];var c=function(){this.store.get("rounds").length<1&&this.nextRound()}.bind(this);t.root?this.root._oncreate.push(c):(this._oncreate=[c],this._beforecreate=[],this._aftercreate=[]),this._fragment=function(t,e){for(var c,f,d,p,_,v,m,g,y,$,b,x,w,C,k,N,P,S,E,O,H,W,j,D,B,I,J,T=t.$rounds,F=[],X=0;X<T.length;X+=1)F[X]=M(t,T,T[X],X,e);var Z=new R({root:e.root,slots:{default:i()},data:{query:L({maxWidth:600})}}),z=t.$players,G=[];for(X=0;X<z.length;X+=1)G[X]=q(0,0,z[X]);var K=t.$rounds,U=[];for(X=0;X<K.length;X+=1)U[X]=A(t,K,K[X],X,e);var V=t.$players,Y=[];for(X=0;X<V.length;X+=1)Y[X]=Q(t,0,V[X]);var tt=new R({root:e.root,slots:{default:i()},data:{query:L({minWidth:601})}});function et(t){e.nextRound()}function nt(t){e.store.set({started:!1})}return{c:function(){c=a("div"),f=u("\n        "),d=a("div");for(var t=0;t<F.length;t+=1)F[t].c();for(p=u("\n    "),Z._fragment.c(),_=u("\n\n    "),v=u("\n    "),m=a("table"),g=a("thead"),y=a("tr"),($=a("th")).textContent="Round #",b=u("\n                "),t=0;t<G.length;t+=1)G[t].c();for(x=u("\n                "),(w=a("th")).textContent="Discard",C=u("\n        "),k=a("tbody"),t=0;t<U.length;t+=1)U[t].c();for(N=u("\n\n            "),P=a("tr"),(S=a("td")).textContent="Totals:",E=u("\n                "),t=0;t<Y.length;t+=1)Y[t].c();O=u("\n                "),H=a("td"),W=u("\n    "),tt._fragment.c(),j=u("\n\n    "),D=a("div"),(B=a("button")).textContent="Next round",I=u("\n        "),(J=a("button")).textContent="Change players",this.h()},h:function(){d.className="twelve columns",P.className="totals",m.className="twelve columns",B.className="button button-primary",l(B,"click",et),J.className="button",l(J,"click",nt),c.className="row"},m:function(t,e){r(c,t,e),n(f,Z._slotted.default),n(d,Z._slotted.default);for(var s=0;s<F.length;s+=1)F[s].m(d,null);for(n(p,Z._slotted.default),Z._mount(c,null),n(_,c),n(v,tt._slotted.default),n(m,tt._slotted.default),n(g,m),n(y,g),n($,y),n(b,y),s=0;s<G.length;s+=1)G[s].m(y,null);for(n(x,y),n(w,y),n(C,m),n(k,m),s=0;s<U.length;s+=1)U[s].m(k,null);for(n(N,k),n(P,k),n(S,P),n(E,P),s=0;s<Y.length;s+=1)Y[s].m(P,null);n(O,P),n(H,P),n(W,tt._slotted.default),tt._mount(c,null),n(j,c),n(D,c),n(B,D),n(I,D),n(J,D)},p:function(t,n){var r=n.$rounds;if(t.$players||t.$rounds){for(var s=0;s<r.length;s+=1)F[s]?F[s].p(t,n,r,r[s],s):(F[s]=M(n,r,r[s],s,e),F[s].c(),F[s].m(d,null));for(;s<F.length;s+=1)F[s].u(),F[s].d();F.length=r.length}var o={};o.query=L({maxWidth:600}),Z._set(o);var i=n.$players;if(t.$players){for(s=0;s<i.length;s+=1)G[s]?G[s].p(t,n,i,i[s],s):(G[s]=q(0,0,i[s]),G[s].c(),G[s].m(y,x));for(;s<G.length;s+=1)G[s].u(),G[s].d();G.length=i.length}var a=n.$rounds;if(t.$players||t.$rounds){for(s=0;s<a.length;s+=1)U[s]?U[s].p(t,n,a,a[s],s):(U[s]=A(n,a,a[s],s,e),U[s].c(),U[s].m(k,N));for(;s<U.length;s+=1)U[s].u(),U[s].d();U.length=a.length}var u=n.$players;if(t.totals||t.$players){for(s=0;s<u.length;s+=1)Y[s]?Y[s].p(t,n,u,u[s],s):(Y[s]=Q(n,0,u[s]),Y[s].c(),Y[s].m(P,O));for(;s<Y.length;s+=1)Y[s].u(),Y[s].d();Y.length=u.length}var c={};c.query=L({minWidth:601}),tt._set(c)},u:function(){s(c);for(var t=0;t<F.length;t+=1)F[t].u();for(t=0;t<G.length;t+=1)G[t].u();for(t=0;t<U.length;t+=1)U[t].u();for(t=0;t<Y.length;t+=1)Y[t].u()},d:function(){o(F),Z.destroy(!1),o(G),o(U),o(Y),tt.destroy(!1),h(B,"click",et),h(J,"click",nt)}}}(this._state,this),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null),this._lock=!0,y(this._beforecreate),y(this._oncreate),y(this._aftercreate),this._lock=!1)}e(I.prototype,{nextRound:function(){var t=this.store.get(),e=t.rounds,n=t.players.reduce(function(t,e){return t[e]=0,t},{});e.push(n),this.store.set({rounds:e})},removeRound:function(t){var e=this.store.get("rounds").filter(function(e,n){return n!==t});this.store.set({rounds:e})},updateScore:function(t,e,n){var r=this.store.get("rounds"),s=+t.target.value,o=r.map(function(t,r){return r===n&&(t[e]=s),t});this.store.set({rounds:o})}},b),I.prototype._recompute=function(t,e){t.$rounds&&p(e.totals,e.totals=(n=e.$rounds,n.reduce(function(t,e){for(var n in e)t[n]=(t[n]||0)+e[n];return t},{})))&&(t.totals=!0);var n};function J(t,e){var n=new I({root:e.root});return e.refs.play=n,{c:function(){n._fragment.c()},m:function(t,e){n._mount(t,e)},u:function(){n._unmount()},d:function(){n.destroy(!1),e.refs.play===n&&(e.refs.play=null)}}}function T(t,e){var n=new C({root:e.root});return e.refs.choose=n,{c:function(){n._fragment.c()},m:function(t,e){n._mount(t,e)},u:function(){n._unmount()},d:function(){n.destroy(!1),e.refs.choose===n&&(e.refs.choose=null)}}}function F(t){return t.$started?J:T}function X(t){m(this,t),this.refs={},this._state=e(this.store._init(["started"]),t.data),this.store._add(this,["started"]),this._handlers.destroy=[$],t.root||(this._oncreate=[],this._beforecreate=[],this._aftercreate=[]),this._fragment=function(t,e){var o,i,c,l=F(t),h=l(t,e);return{c:function(){o=a("div"),(i=a("h1")).textContent="Scorekeeper",c=u("\n\n    "),h.c(),this.h()},h:function(){o.className="container"},m:function(t,e){r(o,t,e),n(i,o),n(c,o),h.m(o,null)},p:function(t,n){l!==(l=F(n))&&(h.u(),h.d(),(h=l(n,e)).c(),h.m(o,null))},u:function(){s(o),h.u()},d:function(){h.d()}}}(this._state,this),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null),this._lock=!0,y(this._beforecreate),y(this._oncreate),y(this._aftercreate),this._lock=!1)}e(X.prototype,b);function Z(t){this._observers={pre:f(),post:f()},this._changeHandlers=[],this._dependents=[],this._computed=f(),this._sortedComputedProperties=[],this._state=e({},t)}e(Z.prototype,{_add:function(t,e){this._dependents.push({component:t,props:e})},_init:function(t){for(var e={},n=0;n<t.length;n+=1){var r=t[n];e["$"+r]=this._state[r]}return e},_remove:function(t){for(var e=this._dependents.length;e--;)if(this._dependents[e].component===t)return void this._dependents.splice(e,1)},_sortComputedProperties:function(){var t,e=this._computed,n=this._sortedComputedProperties=[],r=f();function s(o){if(t[o])throw new Error("Cyclical dependency detected");if(!r[o]){r[o]=!0;var i=e[o];i&&(t[o]=!0,i.deps.forEach(s),n.push(i))}}for(var o in this._computed)t=f(),s(o)},compute:function(t,e,n){var r,s={deps:e,update:function(s,o,i){var a=e.map(function(t){return t in o&&(i=!0),s[t]});if(i){var u=n.apply(null,a);p(u,r)&&(r=u,o[t]=!0,s[t]=r)}}};s.update(this._state,{},!0),this._computed[t]=s,this._sortComputedProperties()},get:v,observe:g,onchange:function(t){return this._changeHandlers.push(t),{cancel:function(){var e=this._changeHandlers.indexOf(t);~e&&this._changeHandlers.splice(e,1)}}},set:function(t){var n=this._state,r=this._changed={},s=!1;for(var o in t){if(this._computed[o])throw new Error("'"+o+"' is a read-only property");p(t[o],n[o])&&(r[o]=s=!0)}if(s){this._state=e({},n,t);for(var i=0;i<this._sortedComputedProperties.length;i+=1)this._sortedComputedProperties[i].update(this._state,r);for(i=0;i<this._changeHandlers.length;i+=1)this._changeHandlers[i](this._state,r);_(this,this._observers.pre,r,this._state,n);var a=this._dependents.slice();for(i=0;i<a.length;i+=1){var u=a[i],c={};s=!1;for(var l=0;l<u.props.length;l+=1){var h=u.props[l];h in r&&(c["$"+h]=this._state[h],s=!0)}s&&u.component.set(c)}_(this,this._observers.post,r,this._state,n)}}});var z=new Z({players:[],rounds:[],started:!1});window.store=z,function(t,e){var n=localStorage.getItem(e);n&&t.set(JSON.parse(n)),t.onchange(function(t){localStorage.setItem(e,JSON.stringify(t))})}(z,"scorekeeper");return new X({target:document.body,store:z})}();
+var app = (function () {
+	'use strict';
+
+	function noop() {}
+
+	function assign(tar, src) {
+		for (var k in src) tar[k] = src[k];
+		return tar;
+	}
+
+	function assignTrue(tar, src) {
+		for (var k in src) tar[k] = 1;
+		return tar;
+	}
+
+	function callAfter(fn, i) {
+		if (i === 0) fn();
+		return () => {
+			if (!--i) fn();
+		};
+	}
+
+	function addLoc(element, file, line, column, char) {
+		element.__svelte_meta = {
+			loc: { file, line, column, char }
+		};
+	}
+
+	function run(fn) {
+		fn();
+	}
+
+	function append(target, node) {
+		target.appendChild(node);
+	}
+
+	function insert(target, node, anchor) {
+		target.insertBefore(node, anchor);
+	}
+
+	function detachNode(node) {
+		node.parentNode.removeChild(node);
+	}
+
+	function reinsertBetween(before, after, target) {
+		while (before.nextSibling && before.nextSibling !== after) {
+			target.appendChild(before.parentNode.removeChild(before.nextSibling));
+		}
+	}
+
+	function destroyEach(iterations, detach) {
+		for (var i = 0; i < iterations.length; i += 1) {
+			if (iterations[i]) iterations[i].d(detach);
+		}
+	}
+
+	function createFragment() {
+		return document.createDocumentFragment();
+	}
+
+	function createElement(name) {
+		return document.createElement(name);
+	}
+
+	function createText(data) {
+		return document.createTextNode(data);
+	}
+
+	function createComment() {
+		return document.createComment('');
+	}
+
+	function addListener(node, event, handler, options) {
+		node.addEventListener(event, handler, options);
+	}
+
+	function removeListener(node, event, handler, options) {
+		node.removeEventListener(event, handler, options);
+	}
+
+	function setAttribute(node, attribute, value) {
+		if (value == null) node.removeAttribute(attribute);
+		else node.setAttribute(attribute, value);
+	}
+
+	function setData(text, data) {
+		text.data = '' + data;
+	}
+
+	function blankObject() {
+		return Object.create(null);
+	}
+
+	function destroy(detach) {
+		this.destroy = noop;
+		this.fire('destroy');
+		this.set = noop;
+
+		this._fragment.d(detach !== false);
+		this._fragment = null;
+		this._state = {};
+	}
+
+	function destroyDev(detach) {
+		destroy.call(this, detach);
+		this.destroy = function() {
+			console.warn('Component was already destroyed');
+		};
+	}
+
+	function _differs(a, b) {
+		return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+	}
+
+	function _differsImmutable(a, b) {
+		return a != a ? b == b : a !== b;
+	}
+
+	function fire(eventName, data) {
+		var handlers =
+			eventName in this._handlers && this._handlers[eventName].slice();
+		if (!handlers) return;
+
+		for (var i = 0; i < handlers.length; i += 1) {
+			var handler = handlers[i];
+
+			if (!handler.__calling) {
+				try {
+					handler.__calling = true;
+					handler.call(this, data);
+				} finally {
+					handler.__calling = false;
+				}
+			}
+		}
+	}
+
+	function flush(component) {
+		component._lock = true;
+		callAll(component._beforecreate);
+		callAll(component._oncreate);
+		callAll(component._aftercreate);
+		component._lock = false;
+	}
+
+	function get() {
+		return this._state;
+	}
+
+	function init(component, options) {
+		component._handlers = blankObject();
+		component._slots = blankObject();
+		component._bind = options._bind;
+		component._staged = {};
+
+		component.options = options;
+		component.root = options.root || component;
+		component.store = options.store || component.root.store;
+
+		if (!options.root) {
+			component._beforecreate = [];
+			component._oncreate = [];
+			component._aftercreate = [];
+		}
+	}
+
+	function on(eventName, handler) {
+		var handlers = this._handlers[eventName] || (this._handlers[eventName] = []);
+		handlers.push(handler);
+
+		return {
+			cancel: function() {
+				var index = handlers.indexOf(handler);
+				if (~index) handlers.splice(index, 1);
+			}
+		};
+	}
+
+	function set(newState) {
+		this._set(assign({}, newState));
+		if (this.root._lock) return;
+		flush(this.root);
+	}
+
+	function _set(newState) {
+		var oldState = this._state,
+			changed = {},
+			dirty = false;
+
+		newState = assign(this._staged, newState);
+		this._staged = {};
+
+		for (var key in newState) {
+			if (this._differs(newState[key], oldState[key])) changed[key] = dirty = true;
+		}
+		if (!dirty) return;
+
+		this._state = assign(assign({}, oldState), newState);
+		this._recompute(changed, this._state);
+		if (this._bind) this._bind(changed, this._state);
+
+		if (this._fragment) {
+			this.fire("state", { changed: changed, current: this._state, previous: oldState });
+			this._fragment.p(changed, this._state);
+			this.fire("update", { changed: changed, current: this._state, previous: oldState });
+		}
+	}
+
+	function _stage(newState) {
+		assign(this._staged, newState);
+	}
+
+	function setDev(newState) {
+		if (typeof newState !== 'object') {
+			throw new Error(
+				this._debugName + '.set was called without an object of data key-values to update.'
+			);
+		}
+
+		this._checkReadOnly(newState);
+		set.call(this, newState);
+	}
+
+	function callAll(fns) {
+		while (fns && fns.length) fns.shift()();
+	}
+
+	function _mount(target, anchor) {
+		this._fragment[this._fragment.i ? 'i' : 'm'](target, anchor || null);
+	}
+
+	function removeFromStore() {
+		this.store._remove(this);
+	}
+
+	var protoDev = {
+		destroy: destroyDev,
+		get,
+		fire,
+		on,
+		set: setDev,
+		_recompute: noop,
+		_set,
+		_stage,
+		_mount,
+		_differs
+	};
+
+	/* src/ChoosePlayers.html generated by Svelte v2.16.0 */
+
+	var methods = {
+
+	    setPlayers(e) {
+	        e.preventDefault();
+
+	        const { form, newplayer } = this.refs;
+	        let players;
+
+	        if (form.elements.players.length) {
+	            players = Array.from(form.elements.players)
+	                .map(i => i.value)
+	                .filter(Boolean);
+	        } else {
+	            players = [form.elements.players.value];
+	        }
+
+	        this.store.set({ players });
+	        newplayer.value = "";
+	    },
+
+	    removePlayer(index) {
+	        const players = this.store.get()['players']
+	            .filter((p, i) => i !== index);
+	        
+	        this.store.set({ players });
+	    },
+
+	    start(e) {
+	        // make sure players are set first
+	        this.setPlayers.call(this, e);
+	        this.store.set({ started: true });
+	    }
+	};
+
+	const file = "src/ChoosePlayers.html";
+
+	function click_handler(event) {
+		const { component, ctx } = this._svelte;
+
+		component.removePlayer(ctx.i);
+	}
+
+	function get_each_context(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.player = list[i];
+		child_ctx.i = i;
+		return child_ctx;
+	}
+
+	function create_main_fragment(component, ctx) {
+		var form, div0, input0, text0, button, text2, text3, div1, input1, current;
+
+		var each_value = ctx.$players;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block(component, get_each_context(ctx, each_value, i));
+		}
+
+		function click_handler_1(event) {
+			component.start(event);
+		}
+
+		function submit_handler(event) {
+			component.setPlayers(event);
+		}
+
+		return {
+			c: function create() {
+				form = createElement("form");
+				div0 = createElement("div");
+				input0 = createElement("input");
+				text0 = createText("\n        ");
+				button = createElement("button");
+				button.textContent = "Add";
+				text2 = createText("\n    ");
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+
+				text3 = createText("\n\n    ");
+				div1 = createElement("div");
+				input1 = createElement("input");
+				setAttribute(input0, "type", "text");
+				input0.name = "players";
+				input0.placeholder = "Add a player";
+				addLoc(input0, file, 3, 8, 77);
+				button.className = "button button-primary";
+				addLoc(button, file, 4, 8, 161);
+				addLoc(div0, file, 2, 4, 63);
+				addListener(input1, "click", click_handler_1);
+				setAttribute(input1, "type", "submit");
+				input1.value = "start";
+				addLoc(input1, file, 13, 9, 472);
+				addLoc(div1, file, 13, 4, 467);
+				addListener(form, "submit", submit_handler);
+				form.className = "row";
+				addLoc(form, file, 0, 0, 0);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, form, anchor);
+				append(form, div0);
+				append(div0, input0);
+				component.refs.newplayer = input0;
+				append(div0, text0);
+				append(div0, button);
+				append(form, text2);
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].m(form, null);
+				}
+
+				append(form, text3);
+				append(form, div1);
+				append(div1, input1);
+				component.refs.form = form;
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.$players) {
+					each_value = ctx.$players;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+						} else {
+							each_blocks[i] = create_each_block(component, child_ctx);
+							each_blocks[i].c();
+							each_blocks[i].m(form, text3);
+						}
+					}
+
+					for (; i < each_blocks.length; i += 1) {
+						each_blocks[i].d(1);
+					}
+					each_blocks.length = each_value.length;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(form);
+				}
+
+				if (component.refs.newplayer === input0) component.refs.newplayer = null;
+
+				destroyEach(each_blocks, detach);
+
+				removeListener(input1, "click", click_handler_1);
+				removeListener(form, "submit", submit_handler);
+				if (component.refs.form === form) component.refs.form = null;
+			}
+		};
+	}
+
+	// (7:4) {#each $players as player, i}
+	function create_each_block(component, ctx) {
+		var div, input, input_value_value, text, button;
+
+		return {
+			c: function create() {
+				div = createElement("div");
+				input = createElement("input");
+				text = createText("\n        ");
+				button = createElement("button");
+				button.textContent = "x";
+				setAttribute(input, "type", "text");
+				input.value = input_value_value = ctx.player;
+				input.name = "players";
+				addLoc(input, file, 8, 8, 275);
+
+				button._svelte = { component, ctx };
+
+				addListener(button, "click", click_handler);
+				button.type = "button";
+				button.className = "button";
+				button.title = "Remove this player";
+				addLoc(button, file, 9, 8, 337);
+				addLoc(div, file, 7, 4, 261);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, input);
+				append(div, text);
+				append(div, button);
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				if ((changed.$players) && input_value_value !== (input_value_value = ctx.player)) {
+					input.value = input_value_value;
+				}
+
+				button._svelte.ctx = ctx;
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(div);
+				}
+
+				removeListener(button, "click", click_handler);
+			}
+		};
+	}
+
+	function ChoosePlayers(options) {
+		this._debugName = '<ChoosePlayers>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+		if (!options.store) {
+			throw new Error("<ChoosePlayers> references store properties, but no store was provided");
+		}
+
+		init(this, options);
+		this.refs = {};
+		this._state = assign(this.store._init(["players"]), options.data);
+		this.store._add(this, ["players"]);
+		if (!('$players' in this._state)) console.warn("<ChoosePlayers> was created without expected data property '$players'");
+		this._intro = !!options.intro;
+
+		this._handlers.destroy = [removeFromStore];
+
+		this._fragment = create_main_fragment(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+		}
+
+		this._intro = true;
+	}
+
+	assign(ChoosePlayers.prototype, protoDev);
+	assign(ChoosePlayers.prototype, methods);
+
+	ChoosePlayers.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	var camel2hyphen = function (str) {
+	  return str
+	          .replace(/[A-Z]/g, function (match) {
+	            return '-' + match.toLowerCase();
+	          })
+	          .toLowerCase();
+	};
+
+	var camel2hyphen_1 = camel2hyphen;
+
+	var isDimension = function (feature) {
+	  var re = /[height|width]$/;
+	  return re.test(feature);
+	};
+
+	var obj2mq = function (obj) {
+	  var mq = '';
+	  var features = Object.keys(obj);
+	  features.forEach(function (feature, index) {
+	    var value = obj[feature];
+	    feature = camel2hyphen_1(feature);
+	    // Add px to dimension features
+	    if (isDimension(feature) && typeof value === 'number') {
+	      value = value + 'px';
+	    }
+	    if (value === true) {
+	      mq += feature;
+	    } else if (value === false) {
+	      mq += 'not ' + feature;
+	    } else {
+	      mq += '(' + feature + ': ' + value + ')';
+	    }
+	    if (index < features.length-1) {
+	      mq += ' and ';
+	    }
+	  });
+	  return mq;
+	};
+
+	var json2mq = function (query) {
+	  var mq = '';
+	  if (typeof query === 'string') {
+	    return query;
+	  }
+	  // Handling array of media queries
+	  if (query instanceof Array) {
+	    query.forEach(function (q, index) {
+	      mq += obj2mq(q);
+	      if (index < query.length-1) {
+	        mq += ', ';
+	      }
+	    });
+	    return mq;
+	  }
+	  // Handling single media query
+	  return obj2mq(query);
+	};
+
+	var json2mq_1 = json2mq;
+
+	/* src/Media.html generated by Svelte v2.16.0 */
+
+	function data() {
+	    return {
+	        matches: true,
+	        query: null
+	    }
+	}
+	var methods$1 = {
+	    updateMatches(e) {
+	        if (this.mediaQueryList) {
+	            this.set({ matches: this.mediaQueryList.matches });
+	        }
+	    }
+	};
+
+	function oncreate() {
+	    
+	    const {query} = this.get();
+
+	    this.updateMatches = this.updateMatches.bind(this);
+	    
+	    this.mediaQueryList = window.matchMedia(query);
+	    this.mediaQueryList.addListener(this.updateMatches);
+
+	    this.updateMatches();
+	}
+	function ondestroy() {
+	    if (this.mediaQueryList) {
+	        this.mediaQueryList.removeListener(this.updateMatches);
+	    }
+	}
+	function create_main_fragment$1(component, ctx) {
+		var if_block_anchor, current;
+
+		var if_block = (ctx.matches) && create_if_block(component, ctx);
+
+		return {
+			c: function create() {
+				if (if_block) if_block.c();
+				if_block_anchor = createComment();
+			},
+
+			m: function mount(target, anchor) {
+				if (if_block) if_block.m(target, anchor);
+				insert(target, if_block_anchor, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (ctx.matches) {
+					if (!if_block) {
+						if_block = create_if_block(component, ctx);
+						if_block.c();
+						if_block.m(if_block_anchor.parentNode, if_block_anchor);
+					}
+				} else if (if_block) {
+					if_block.d(1);
+					if_block = null;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				if (if_block) if_block.d(detach);
+				if (detach) {
+					detachNode(if_block_anchor);
+				}
+			}
+		};
+	}
+
+	// (2:0) {#if matches}
+	function create_if_block(component, ctx) {
+		var slot_content_default = component._slotted.default, slot_content_default_before, slot_content_default_after;
+
+		return {
+			c: noop,
+
+			m: function mount(target, anchor) {
+				if (slot_content_default) {
+					insert(target, slot_content_default_before || (slot_content_default_before = createComment()), anchor);
+					insert(target, slot_content_default, anchor);
+					insert(target, slot_content_default_after || (slot_content_default_after = createComment()), anchor);
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (slot_content_default) {
+					reinsertBetween(slot_content_default_before, slot_content_default_after, slot_content_default);
+					detachNode(slot_content_default_before);
+					detachNode(slot_content_default_after);
+				}
+			}
+		};
+	}
+
+	function Media(options) {
+		this._debugName = '<Media>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign(data(), options.data);
+		if (!('matches' in this._state)) console.warn("<Media> was created without expected data property 'matches'");
+		this._intro = !!options.intro;
+
+		this._handlers.destroy = [ondestroy];
+
+		this._slotted = options.slots || {};
+
+		this._fragment = create_main_fragment$1(this, this._state);
+
+		this.root._oncreate.push(() => {
+			oncreate.call(this);
+			this.fire("update", { changed: assignTrue({}, this._state), current: this._state });
+		});
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Media.prototype, protoDev);
+	assign(Media.prototype, methods$1);
+
+	Media.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	// helpers outside of components
+
+	function totals(rounds) {
+	    return rounds.reduce((m, round) => {
+	        for (let player in round) {
+	            m[player] = (m[player] || 0) + round[player];
+	        }
+
+	        return m;
+	    }, {});
+	}
+
+	function useLocalStorage(store, key) {
+	    const json = localStorage.getItem(key);
+	    if (json) {
+	        store.set(JSON.parse(json));
+	    }
+
+	    store.on('state', ({ current, previous, changed }) => {
+	        localStorage.setItem(key, JSON.stringify(current));
+	    });
+	}
+
+	/* src/Play.html generated by Svelte v2.16.0 */
+
+
+
+	function totals_1({ $rounds }) {
+		return totals($rounds);
+	}
+
+	var methods$2 = {
+	    nextRound() {
+
+	        const { rounds, players } = this.store.get();
+
+	        const round = players.reduce((m, p) => {
+	            m[p] = 0;
+	            return m;
+	        }, {});
+
+	        rounds.push(round);
+
+	        this.store.set({ rounds });
+	    },
+
+	    removeRound(index) {
+	        let { rounds } = this.store.get();
+	        
+	        rounds = rounds.filter((r, i) => i !== index);
+
+	        this.store.set({ rounds });
+	    },
+
+	    updateScore(e, player, index) {
+
+	        const { rounds } = this.store.get();
+	        const value = +e.target.value;
+
+	        const updated = rounds.map((round, i) => {
+
+	            if (i === index) {
+	                round[player] = value;
+	            }
+
+	            return round;
+	        });
+
+	        this.store.set({ rounds: updated });
+	    }
+	};
+
+	function oncreate$1() {
+	    const { rounds } = this.store.get();
+
+	    if (rounds.length < 1) {
+	        this.nextRound();
+	    }
+	}
+	const file$2 = "src/Play.html";
+
+	function get_each3_context(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.player = list[i];
+		return child_ctx;
+	}
+
+	function click_handler_1(event) {
+		const { component, ctx } = this._svelte;
+
+		component.removeRound(ctx.i);
+	}
+
+	function input_handler_1(event) {
+		const { component, ctx } = this._svelte;
+
+		component.updateScore(event, ctx.player, ctx.i);
+	}
+
+	function get_each_context_1(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.player = list[i];
+		return child_ctx;
+	}
+
+	function get_each2_context(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.round = list[i];
+		child_ctx.i = i;
+		return child_ctx;
+	}
+
+	function get_each1_context(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.player = list[i];
+		child_ctx.i = i;
+		return child_ctx;
+	}
+
+	function input_handler(event) {
+		const { component, ctx } = this._svelte;
+
+		component.updateScore(event, ctx.player, ctx.i);
+	}
+
+	function get_each_context$1(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.player = list[i];
+		return child_ctx;
+	}
+
+	function click_handler$1(event) {
+		const { component, ctx } = this._svelte;
+
+		component.removeRound(ctx.i);
+	}
+
+	function get_each0_context(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.round = list[i];
+		child_ctx.i = i;
+		return child_ctx;
+	}
+
+	function create_main_fragment$2(component, ctx) {
+		var div2, div0, text0, table, thead, tr0, th0, text2, text3, th1, text5, tbody, text6, tr1, td0, text8, text9, td1, text10, div1, button0, text12, button1, current;
+
+		var each0_value = ctx.$rounds;
+
+		var each0_blocks = [];
+
+		for (var i = 0; i < each0_value.length; i += 1) {
+			each0_blocks[i] = create_each_block_4(component, get_each0_context(ctx, each0_value, i));
+		}
+
+		var media0_initial_data = { query: json2mq_1({ maxWidth: 600 }) };
+		var media0 = new Media({
+			root: component.root,
+			store: component.store,
+			slots: { default: createFragment() },
+			data: media0_initial_data
+		});
+
+		var each1_value = ctx.$players;
+
+		var each1_blocks = [];
+
+		for (var i = 0; i < each1_value.length; i += 1) {
+			each1_blocks[i] = create_each_block_3(component, get_each1_context(ctx, each1_value, i));
+		}
+
+		var each2_value = ctx.$rounds;
+
+		var each2_blocks = [];
+
+		for (var i = 0; i < each2_value.length; i += 1) {
+			each2_blocks[i] = create_each_block_1(component, get_each2_context(ctx, each2_value, i));
+		}
+
+		var each3_value = ctx.$players;
+
+		var each3_blocks = [];
+
+		for (var i = 0; i < each3_value.length; i += 1) {
+			each3_blocks[i] = create_each_block$1(component, get_each3_context(ctx, each3_value, i));
+		}
+
+		var media1_initial_data = { query: json2mq_1({ minWidth: 601 }) };
+		var media1 = new Media({
+			root: component.root,
+			store: component.store,
+			slots: { default: createFragment() },
+			data: media1_initial_data
+		});
+
+		function click_handler_2(event) {
+			component.nextRound();
+		}
+
+		function click_handler_3(event) {
+			component.store.set({ started: false });
+		}
+
+		return {
+			c: function create() {
+				div2 = createElement("div");
+				div0 = createElement("div");
+
+				for (var i = 0; i < each0_blocks.length; i += 1) {
+					each0_blocks[i].c();
+				}
+
+				media0._fragment.c();
+				text0 = createText("\n\n    ");
+				table = createElement("table");
+				thead = createElement("thead");
+				tr0 = createElement("tr");
+				th0 = createElement("th");
+				th0.textContent = "Round #";
+				text2 = createText("\n                ");
+
+				for (var i = 0; i < each1_blocks.length; i += 1) {
+					each1_blocks[i].c();
+				}
+
+				text3 = createText("\n                ");
+				th1 = createElement("th");
+				th1.textContent = "Discard";
+				text5 = createText("\n        ");
+				tbody = createElement("tbody");
+
+				for (var i = 0; i < each2_blocks.length; i += 1) {
+					each2_blocks[i].c();
+				}
+
+				text6 = createText("\n\n            ");
+				tr1 = createElement("tr");
+				td0 = createElement("td");
+				td0.textContent = "Totals:";
+				text8 = createText("\n                ");
+
+				for (var i = 0; i < each3_blocks.length; i += 1) {
+					each3_blocks[i].c();
+				}
+
+				text9 = createText("\n                ");
+				td1 = createElement("td");
+				media1._fragment.c();
+				text10 = createText("\n\n    ");
+				div1 = createElement("div");
+				button0 = createElement("button");
+				button0.textContent = "Next round";
+				text12 = createText("\n        ");
+				button1 = createElement("button");
+				button1.textContent = "Change players";
+				div0.className = "twelve columns";
+				addLoc(div0, file$2, 2, 8, 75);
+				addLoc(th0, file$2, 29, 16, 886);
+				addLoc(th1, file$2, 33, 16, 1025);
+				addLoc(tr0, file$2, 28, 12, 865);
+				addLoc(thead, file$2, 27, 8, 845);
+				addLoc(td0, file$2, 55, 16, 1660);
+				addLoc(td1, file$2, 59, 16, 1809);
+				tr1.className = "totals";
+				addLoc(tr1, file$2, 54, 12, 1624);
+				addLoc(tbody, file$2, 36, 8, 1085);
+				table.className = "twelve columns";
+				addLoc(table, file$2, 26, 4, 806);
+				addListener(button0, "click", click_handler_2);
+				button0.className = "button button-primary";
+				addLoc(button0, file$2, 66, 8, 1899);
+				addListener(button1, "click", click_handler_3);
+				button1.className = "button";
+				addLoc(button1, file$2, 67, 8, 1988);
+				addLoc(div1, file$2, 65, 4, 1885);
+				div2.className = "row";
+				addLoc(div2, file$2, 0, 0, 0);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div2, anchor);
+				append(media0._slotted.default, div0);
+
+				for (var i = 0; i < each0_blocks.length; i += 1) {
+					each0_blocks[i].m(div0, null);
+				}
+
+				media0._mount(div2, null);
+				append(div2, text0);
+				append(media1._slotted.default, table);
+				append(table, thead);
+				append(thead, tr0);
+				append(tr0, th0);
+				append(tr0, text2);
+
+				for (var i = 0; i < each1_blocks.length; i += 1) {
+					each1_blocks[i].m(tr0, null);
+				}
+
+				append(tr0, text3);
+				append(tr0, th1);
+				append(table, text5);
+				append(table, tbody);
+
+				for (var i = 0; i < each2_blocks.length; i += 1) {
+					each2_blocks[i].m(tbody, null);
+				}
+
+				append(tbody, text6);
+				append(tbody, tr1);
+				append(tr1, td0);
+				append(tr1, text8);
+
+				for (var i = 0; i < each3_blocks.length; i += 1) {
+					each3_blocks[i].m(tr1, null);
+				}
+
+				append(tr1, text9);
+				append(tr1, td1);
+				media1._mount(div2, null);
+				append(div2, text10);
+				append(div2, div1);
+				append(div1, button0);
+				append(div1, text12);
+				append(div1, button1);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.$players || changed.$rounds) {
+					each0_value = ctx.$rounds;
+
+					for (var i = 0; i < each0_value.length; i += 1) {
+						const child_ctx = get_each0_context(ctx, each0_value, i);
+
+						if (each0_blocks[i]) {
+							each0_blocks[i].p(changed, child_ctx);
+						} else {
+							each0_blocks[i] = create_each_block_4(component, child_ctx);
+							each0_blocks[i].c();
+							each0_blocks[i].m(div0, null);
+						}
+					}
+
+					for (; i < each0_blocks.length; i += 1) {
+						each0_blocks[i].d(1);
+					}
+					each0_blocks.length = each0_value.length;
+				}
+
+				if (changed.$players) {
+					each1_value = ctx.$players;
+
+					for (var i = 0; i < each1_value.length; i += 1) {
+						const child_ctx = get_each1_context(ctx, each1_value, i);
+
+						if (each1_blocks[i]) {
+							each1_blocks[i].p(changed, child_ctx);
+						} else {
+							each1_blocks[i] = create_each_block_3(component, child_ctx);
+							each1_blocks[i].c();
+							each1_blocks[i].m(tr0, text3);
+						}
+					}
+
+					for (; i < each1_blocks.length; i += 1) {
+						each1_blocks[i].d(1);
+					}
+					each1_blocks.length = each1_value.length;
+				}
+
+				if (changed.$players || changed.$rounds) {
+					each2_value = ctx.$rounds;
+
+					for (var i = 0; i < each2_value.length; i += 1) {
+						const child_ctx = get_each2_context(ctx, each2_value, i);
+
+						if (each2_blocks[i]) {
+							each2_blocks[i].p(changed, child_ctx);
+						} else {
+							each2_blocks[i] = create_each_block_1(component, child_ctx);
+							each2_blocks[i].c();
+							each2_blocks[i].m(tbody, text6);
+						}
+					}
+
+					for (; i < each2_blocks.length; i += 1) {
+						each2_blocks[i].d(1);
+					}
+					each2_blocks.length = each2_value.length;
+				}
+
+				if (changed.totals || changed.$players) {
+					each3_value = ctx.$players;
+
+					for (var i = 0; i < each3_value.length; i += 1) {
+						const child_ctx = get_each3_context(ctx, each3_value, i);
+
+						if (each3_blocks[i]) {
+							each3_blocks[i].p(changed, child_ctx);
+						} else {
+							each3_blocks[i] = create_each_block$1(component, child_ctx);
+							each3_blocks[i].c();
+							each3_blocks[i].m(tr1, text9);
+						}
+					}
+
+					for (; i < each3_blocks.length; i += 1) {
+						each3_blocks[i].d(1);
+					}
+					each3_blocks.length = each3_value.length;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				outrocallback = callAfter(outrocallback, 2);
+
+				if (media0) media0._fragment.o(outrocallback);
+				if (media1) media1._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(div2);
+				}
+
+				destroyEach(each0_blocks, detach);
+
+				media0.destroy();
+
+				destroyEach(each1_blocks, detach);
+
+				destroyEach(each2_blocks, detach);
+
+				destroyEach(each3_blocks, detach);
+
+				media1.destroy();
+				removeListener(button0, "click", click_handler_2);
+				removeListener(button1, "click", click_handler_3);
+			}
+		};
+	}
+
+	// (12:16) {#each $players as player}
+	function create_each_block_5(component, ctx) {
+		var dt, label, span, text0_value = ctx.player, text0, text1, input, input_value_value;
+
+		return {
+			c: function create() {
+				dt = createElement("dt");
+				label = createElement("label");
+				span = createElement("span");
+				text0 = createText(text0_value);
+				text1 = createText("\n                        ");
+				input = createElement("input");
+				addLoc(span, file$2, 14, 24, 445);
+
+				input._svelte = { component, ctx };
+
+				addListener(input, "input", input_handler);
+				setAttribute(input, "type", "number");
+				input.value = input_value_value = ctx.round[ctx.player];
+				addLoc(input, file$2, 15, 24, 493);
+				label.className = "svelte-c1ugnr";
+				addLoc(label, file$2, 13, 20, 413);
+				dt.className = "svelte-c1ugnr";
+				addLoc(dt, file$2, 12, 16, 388);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, dt, anchor);
+				append(dt, label);
+				append(label, span);
+				append(span, text0);
+				append(label, text1);
+				append(label, input);
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				if ((changed.$players) && text0_value !== (text0_value = ctx.player)) {
+					setData(text0, text0_value);
+				}
+
+				input._svelte.ctx = ctx;
+				if ((changed.$rounds || changed.$players) && input_value_value !== (input_value_value = ctx.round[ctx.player])) {
+					input.value = input_value_value;
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(dt);
+				}
+
+				removeListener(input, "input", input_handler);
+			}
+		};
+	}
+
+	// (4:12) {#each $rounds as round, i}
+	function create_each_block_4(component, ctx) {
+		var header, h2, text0, text1_value = ctx.i+1, text1, text2, button, text4, dl;
+
+		var each_value = ctx.$players;
+
+		var each_blocks = [];
+
+		for (var i_1 = 0; i_1 < each_value.length; i_1 += 1) {
+			each_blocks[i_1] = create_each_block_5(component, get_each_context$1(ctx, each_value, i_1));
+		}
+
+		return {
+			c: function create() {
+				header = createElement("header");
+				h2 = createElement("h2");
+				text0 = createText("Round ");
+				text1 = createText(text1_value);
+				text2 = createText("\n                ");
+				button = createElement("button");
+				button.textContent = "X";
+				text4 = createText("\n\n            ");
+				dl = createElement("dl");
+
+				for (var i_1 = 0; i_1 < each_blocks.length; i_1 += 1) {
+					each_blocks[i_1].c();
+				}
+				h2.className = "svelte-c1ugnr";
+				addLoc(h2, file$2, 6, 16, 182);
+
+				button._svelte = { component, ctx };
+
+				addListener(button, "click", click_handler$1);
+				button.className = "x-round button svelte-c1ugnr";
+				addLoc(button, file$2, 7, 16, 221);
+				header.className = "svelte-c1ugnr";
+				addLoc(header, file$2, 5, 12, 157);
+				addLoc(dl, file$2, 10, 12, 324);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, header, anchor);
+				append(header, h2);
+				append(h2, text0);
+				append(h2, text1);
+				append(header, text2);
+				append(header, button);
+				insert(target, text4, anchor);
+				insert(target, dl, anchor);
+
+				for (var i_1 = 0; i_1 < each_blocks.length; i_1 += 1) {
+					each_blocks[i_1].m(dl, null);
+				}
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				button._svelte.ctx = ctx;
+
+				if (changed.$rounds || changed.$players) {
+					each_value = ctx.$players;
+
+					for (var i_1 = 0; i_1 < each_value.length; i_1 += 1) {
+						const child_ctx = get_each_context$1(ctx, each_value, i_1);
+
+						if (each_blocks[i_1]) {
+							each_blocks[i_1].p(changed, child_ctx);
+						} else {
+							each_blocks[i_1] = create_each_block_5(component, child_ctx);
+							each_blocks[i_1].c();
+							each_blocks[i_1].m(dl, null);
+						}
+					}
+
+					for (; i_1 < each_blocks.length; i_1 += 1) {
+						each_blocks[i_1].d(1);
+					}
+					each_blocks.length = each_value.length;
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(header);
+				}
+
+				removeListener(button, "click", click_handler$1);
+				if (detach) {
+					detachNode(text4);
+					detachNode(dl);
+				}
+
+				destroyEach(each_blocks, detach);
+			}
+		};
+	}
+
+	// (31:16) {#each $players as player, i}
+	function create_each_block_3(component, ctx) {
+		var th, text_value = ctx.player, text;
+
+		return {
+			c: function create() {
+				th = createElement("th");
+				text = createText(text_value);
+				addLoc(th, file$2, 31, 16, 965);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, th, anchor);
+				append(th, text);
+			},
+
+			p: function update(changed, ctx) {
+				if ((changed.$players) && text_value !== (text_value = ctx.player)) {
+					setData(text, text_value);
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(th);
+				}
+			}
+		};
+	}
+
+	// (43:16) {#each $players as player}
+	function create_each_block_2(component, ctx) {
+		var td, input, input_value_value;
+
+		return {
+			c: function create() {
+				td = createElement("td");
+				input = createElement("input");
+				input._svelte = { component, ctx };
+
+				addListener(input, "input", input_handler_1);
+				setAttribute(input, "type", "number");
+				input.value = input_value_value = ctx.round[ctx.player];
+				addLoc(input, file$2, 44, 20, 1306);
+				addLoc(td, file$2, 43, 16, 1281);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, td, anchor);
+				append(td, input);
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				input._svelte.ctx = ctx;
+				if ((changed.$rounds || changed.$players) && input_value_value !== (input_value_value = ctx.round[ctx.player])) {
+					input.value = input_value_value;
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(td);
+				}
+
+				removeListener(input, "input", input_handler_1);
+			}
+		};
+	}
+
+	// (38:12) {#each $rounds as round, i}
+	function create_each_block_1(component, ctx) {
+		var tr, td0, text0_value = ctx.i+1, text0, text1, text2, td1, button;
+
+		var each_value_1 = ctx.$players;
+
+		var each_blocks = [];
+
+		for (var i_1 = 0; i_1 < each_value_1.length; i_1 += 1) {
+			each_blocks[i_1] = create_each_block_2(component, get_each_context_1(ctx, each_value_1, i_1));
+		}
+
+		return {
+			c: function create() {
+				tr = createElement("tr");
+				td0 = createElement("td");
+				text0 = createText(text0_value);
+				text1 = createText("\n                ");
+
+				for (var i_1 = 0; i_1 < each_blocks.length; i_1 += 1) {
+					each_blocks[i_1].c();
+				}
+
+				text2 = createText("\n\n                ");
+				td1 = createElement("td");
+				button = createElement("button");
+				button.textContent = "x";
+				addLoc(td0, file$2, 39, 16, 1166);
+
+				button._svelte = { component, ctx };
+
+				addListener(button, "click", click_handler_1);
+				button.className = "x-round button svelte-c1ugnr";
+				addLoc(button, file$2, 49, 20, 1483);
+				addLoc(td1, file$2, 48, 16, 1458);
+				addLoc(tr, file$2, 38, 12, 1145);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, tr, anchor);
+				append(tr, td0);
+				append(td0, text0);
+				append(tr, text1);
+
+				for (var i_1 = 0; i_1 < each_blocks.length; i_1 += 1) {
+					each_blocks[i_1].m(tr, null);
+				}
+
+				append(tr, text2);
+				append(tr, td1);
+				append(td1, button);
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				if (changed.$rounds || changed.$players) {
+					each_value_1 = ctx.$players;
+
+					for (var i_1 = 0; i_1 < each_value_1.length; i_1 += 1) {
+						const child_ctx = get_each_context_1(ctx, each_value_1, i_1);
+
+						if (each_blocks[i_1]) {
+							each_blocks[i_1].p(changed, child_ctx);
+						} else {
+							each_blocks[i_1] = create_each_block_2(component, child_ctx);
+							each_blocks[i_1].c();
+							each_blocks[i_1].m(tr, text2);
+						}
+					}
+
+					for (; i_1 < each_blocks.length; i_1 += 1) {
+						each_blocks[i_1].d(1);
+					}
+					each_blocks.length = each_value_1.length;
+				}
+
+				button._svelte.ctx = ctx;
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(tr);
+				}
+
+				destroyEach(each_blocks, detach);
+
+				removeListener(button, "click", click_handler_1);
+			}
+		};
+	}
+
+	// (57:16) {#each $players as player}
+	function create_each_block$1(component, ctx) {
+		var td, text_value = ctx.totals[ctx.player] || 0, text;
+
+		return {
+			c: function create() {
+				td = createElement("td");
+				text = createText(text_value);
+				addLoc(td, file$2, 57, 16, 1736);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, td, anchor);
+				append(td, text);
+			},
+
+			p: function update(changed, ctx) {
+				if ((changed.totals || changed.$players) && text_value !== (text_value = ctx.totals[ctx.player] || 0)) {
+					setData(text, text_value);
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(td);
+				}
+			}
+		};
+	}
+
+	function Play(options) {
+		this._debugName = '<Play>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+		if (!options.store) {
+			throw new Error("<Play> references store properties, but no store was provided");
+		}
+
+		init(this, options);
+		this._state = assign(this.store._init(["rounds","players"]), options.data);
+		this.store._add(this, ["rounds","players"]);
+
+		this._recompute({ $rounds: 1 }, this._state);
+		if (!('$rounds' in this._state)) console.warn("<Play> was created without expected data property '$rounds'");
+		if (!('$players' in this._state)) console.warn("<Play> was created without expected data property '$players'");
+		this._intro = !!options.intro;
+
+		this._handlers.destroy = [removeFromStore];
+
+		this._fragment = create_main_fragment$2(this, this._state);
+
+		this.root._oncreate.push(() => {
+			oncreate$1.call(this);
+			this.fire("update", { changed: assignTrue({}, this._state), current: this._state });
+		});
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Play.prototype, protoDev);
+	assign(Play.prototype, methods$2);
+
+	Play.prototype._checkReadOnly = function _checkReadOnly(newState) {
+		if ('totals' in newState && !this._updatingReadonlyProperty) throw new Error("<Play>: Cannot set read-only property 'totals'");
+	};
+
+	Play.prototype._recompute = function _recompute(changed, state) {
+		if (changed.$rounds) {
+			if (this._differs(state.totals, (state.totals = totals_1(state)))) changed.totals = true;
+		}
+	};
+
+	/* src/App.html generated by Svelte v2.16.0 */
+
+
+
+
+
+	const file$3 = "src/App.html";
+
+	function create_main_fragment$3(component, ctx) {
+		var div, h1, text_1, current_block_type_index, if_block, current;
+
+		var if_block_creators = [
+			create_if_block$1,
+			create_else_block
+		];
+
+		var if_blocks = [];
+
+		function select_block_type(ctx) {
+			if (ctx.$started) return 0;
+			return 1;
+		}
+
+		current_block_type_index = select_block_type(ctx);
+		if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](component, ctx);
+
+		return {
+			c: function create() {
+				div = createElement("div");
+				h1 = createElement("h1");
+				h1.textContent = "Scorekeeper";
+				text_1 = createText("\n\n    ");
+				if_block.c();
+				addLoc(h1, file$3, 1, 4, 28);
+				div.className = "container";
+				addLoc(div, file$3, 0, 0, 0);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, h1);
+				append(div, text_1);
+				if_blocks[current_block_type_index].m(div, null);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var previous_block_index = current_block_type_index;
+				current_block_type_index = select_block_type(ctx);
+				if (current_block_type_index !== previous_block_index) {
+					if_block.o(function() {
+						if_blocks[previous_block_index].d(1);
+						if_blocks[previous_block_index] = null;
+					});
+
+					if_block = if_blocks[current_block_type_index];
+					if (!if_block) {
+						if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](component, ctx);
+						if_block.c();
+					}
+					if_block.m(div, null);
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				if (if_block) if_block.o(outrocallback);
+				else outrocallback();
+
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(div);
+				}
+
+				if_blocks[current_block_type_index].d();
+			}
+		};
+	}
+
+	// (6:4) {:else}
+	function create_else_block(component, ctx) {
+		var current;
+
+		var chooseplayers = new ChoosePlayers({
+			root: component.root,
+			store: component.store
+		});
+
+		component.refs.choose = chooseplayers;
+
+		return {
+			c: function create() {
+				chooseplayers._fragment.c();
+			},
+
+			m: function mount(target, anchor) {
+				chooseplayers._mount(target, anchor);
+				current = true;
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				if (chooseplayers) chooseplayers._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				chooseplayers.destroy(detach);
+				if (component.refs.choose === chooseplayers) component.refs.choose = null;
+			}
+		};
+	}
+
+	// (4:4) {#if $started}
+	function create_if_block$1(component, ctx) {
+		var current;
+
+		var play = new Play({
+			root: component.root,
+			store: component.store
+		});
+
+		component.refs.play = play;
+
+		return {
+			c: function create() {
+				play._fragment.c();
+			},
+
+			m: function mount(target, anchor) {
+				play._mount(target, anchor);
+				current = true;
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				if (play) play._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				play.destroy(detach);
+				if (component.refs.play === play) component.refs.play = null;
+			}
+		};
+	}
+
+	function App(options) {
+		this._debugName = '<App>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+		if (!options.store) {
+			throw new Error("<App> references store properties, but no store was provided");
+		}
+
+		init(this, options);
+		this.refs = {};
+		this._state = assign(this.store._init(["started"]), options.data);
+		this.store._add(this, ["started"]);
+		if (!('$started' in this._state)) console.warn("<App> was created without expected data property '$started'");
+		this._intro = !!options.intro;
+
+		this._handlers.destroy = [removeFromStore];
+
+		this._fragment = create_main_fragment$3(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(App.prototype, protoDev);
+
+	App.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	function Store(state, options) {
+		this._handlers = {};
+		this._dependents = [];
+
+		this._computed = blankObject();
+		this._sortedComputedProperties = [];
+
+		this._state = assign({}, state);
+		this._differs = options && options.immutable ? _differsImmutable : _differs;
+	}
+
+	assign(Store.prototype, {
+		_add(component, props) {
+			this._dependents.push({
+				component: component,
+				props: props
+			});
+		},
+
+		_init(props) {
+			const state = {};
+			for (let i = 0; i < props.length; i += 1) {
+				const prop = props[i];
+				state['$' + prop] = this._state[prop];
+			}
+			return state;
+		},
+
+		_remove(component) {
+			let i = this._dependents.length;
+			while (i--) {
+				if (this._dependents[i].component === component) {
+					this._dependents.splice(i, 1);
+					return;
+				}
+			}
+		},
+
+		_set(newState, changed) {
+			const previous = this._state;
+			this._state = assign(assign({}, previous), newState);
+
+			for (let i = 0; i < this._sortedComputedProperties.length; i += 1) {
+				this._sortedComputedProperties[i].update(this._state, changed);
+			}
+
+			this.fire('state', {
+				changed,
+				previous,
+				current: this._state
+			});
+
+			this._dependents
+				.filter(dependent => {
+					const componentState = {};
+					let dirty = false;
+
+					for (let j = 0; j < dependent.props.length; j += 1) {
+						const prop = dependent.props[j];
+						if (prop in changed) {
+							componentState['$' + prop] = this._state[prop];
+							dirty = true;
+						}
+					}
+
+					if (dirty) {
+						dependent.component._stage(componentState);
+						return true;
+					}
+				})
+				.forEach(dependent => {
+					dependent.component.set({});
+				});
+
+			this.fire('update', {
+				changed,
+				previous,
+				current: this._state
+			});
+		},
+
+		_sortComputedProperties() {
+			const computed = this._computed;
+			const sorted = this._sortedComputedProperties = [];
+			const visited = blankObject();
+			let currentKey;
+
+			function visit(key) {
+				const c = computed[key];
+
+				if (c) {
+					c.deps.forEach(dep => {
+						if (dep === currentKey) {
+							throw new Error(`Cyclical dependency detected between ${dep} <-> ${key}`);
+						}
+
+						visit(dep);
+					});
+
+					if (!visited[key]) {
+						visited[key] = true;
+						sorted.push(c);
+					}
+				}
+			}
+
+			for (const key in this._computed) {
+				visit(currentKey = key);
+			}
+		},
+
+		compute(key, deps, fn) {
+			let value;
+
+			const c = {
+				deps,
+				update: (state, changed, dirty) => {
+					const values = deps.map(dep => {
+						if (dep in changed) dirty = true;
+						return state[dep];
+					});
+
+					if (dirty) {
+						const newValue = fn.apply(null, values);
+						if (this._differs(newValue, value)) {
+							value = newValue;
+							changed[key] = true;
+							state[key] = value;
+						}
+					}
+				}
+			};
+
+			this._computed[key] = c;
+			this._sortComputedProperties();
+
+			const state = assign({}, this._state);
+			const changed = {};
+			c.update(state, changed, true);
+			this._set(state, changed);
+		},
+
+		fire,
+
+		get,
+
+		on,
+
+		set(newState) {
+			const oldState = this._state;
+			const changed = this._changed = {};
+			let dirty = false;
+
+			for (const key in newState) {
+				if (this._computed[key]) throw new Error(`'${key}' is a read-only computed property`);
+				if (this._differs(newState[key], oldState[key])) changed[key] = dirty = true;
+			}
+			if (!dirty) return;
+
+			this._set(newState, changed);
+		}
+	});
+
+	const store = new Store({
+		players: [],
+	    rounds: [],
+	    started: false
+	});
+
+	window.store = store;
+
+	// save data to localStorage every time our state changes
+	useLocalStorage(store, 'scorekeeper');
+
+	const app = new App({
+		target: document.body,
+		store
+	});
+
+	return app;
+
+}());
 //# sourceMappingURL=bundle.js.map

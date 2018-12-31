@@ -4,12 +4,12 @@
         <input ref:newplayer type="text" name="players" placeholder="Add a player">
         <button class="button button-primary">Add</button>
     </div>
-    {{#each $players as player, i}}
+    {#each $players as player, i}
     <div>
-        <input type="text" value="{{ player }}" name="players">
+        <input type="text" value="{ player }" name="players">
         <button type="button" class="button" title="Remove this player" on:click="removePlayer(i)">x</button>
     </div>
-    {{/each}}
+    {/each}
 
     <div><input type="submit" value="start" on:click="start(event)"></div>
 </form>
@@ -25,7 +25,7 @@ export default {
         setPlayers(e) {
             e.preventDefault();
 
-            const {form, newplayer} = this.refs;
+            const { form, newplayer } = this.refs;
             let players;
 
             if (form.elements.players.length) {
@@ -41,7 +41,7 @@ export default {
         },
 
         removePlayer(index) {
-            const players = this.store.get('players')
+            const players = this.store.get()['players']
                 .filter((p, i) => i !== index);
             
             this.store.set({ players });

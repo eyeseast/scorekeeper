@@ -1,62 +1,62 @@
 <div class="row">
-    <Media query={{ json2mq({ maxWidth: 600 }) }}>
+    <Media query={ json2mq({ maxWidth: 600 }) }>
         <div class="twelve columns">
-            {{#each $rounds as round, i}}
+            {#each $rounds as round, i}
 
             <header>
-                <h2>Round {{ i+1 }}</h2>
+                <h2>Round { i+1 }</h2>
                 <button class="x-round button" on:click="removeRound(i)">X</button>
             </header>
 
             <dl>
-                {{#each $players as player}}
+                {#each $players as player}
                 <dt>
                     <label>
-                        <span>{{ player }}</span>
-                        <input type="number" value="{{ round[player] }}" 
+                        <span>{ player }</span>
+                        <input type="number" value="{ round[player] }" 
                             on:input="updateScore(event, player, i)">
                     </label>
                 </dt>
-                {{/each}}
+                {/each}
             </dl>
-            {{/each}}
+            {/each}
         </div>
     </Media>
 
-    <Media query={{ json2mq({ minWidth: 601 }) }}>
+    <Media query={ json2mq({ minWidth: 601 }) }>
     <table class="twelve columns">
         <thead>
             <tr>
                 <th>Round #</th>
-                {{#each $players as player, i}}
-                <th>{{ player }}</th>
-                {{/each}}
+                {#each $players as player, i}
+                <th>{ player }</th>
+                {/each}
                 <th>Discard</th>
             </tr>
         </thead>
         <tbody>
-            {{#each $rounds as round, i}}
+            {#each $rounds as round, i}
             <tr>
                 <td>
-                    {{ i+1 }} 
+                    { i+1 } 
                 </td>
-                {{#each $players as player}}
+                {#each $players as player}
                 <td>
-                    <input type="number" value="{{ round[player] }}" on:input="updateScore(event, player, i)">
+                    <input type="number" value="{ round[player] }" on:input="updateScore(event, player, i)">
                 </td>
-                {{/each}}
+                {/each}
 
                 <td>
                     <button class="x-round button" on:click="removeRound(i)">x</button>
                 </td>
             </tr>
-            {{/each}}
+            {/each}
 
             <tr class="totals">
                 <td>Totals:</td>
-                {{#each $players as player}}
-                <td>{{ totals[player] || 0 }}</td>
-                {{/each}}
+                {#each $players as player}
+                <td>{ totals[player] || 0 }</td>
+                {/each}
                 <td></td>
             </tr>
         </tbody>
@@ -65,7 +65,7 @@
 
     <div>
         <button class="button button-primary" on:click="nextRound()">Next round</button>
-        <button class="button" on:click="store.set({ started: false })">Change players</button>
+        <button class="button" on:click="$set({ started: false })">Change players</button>
     </div>
 </div>
 
@@ -106,7 +106,7 @@ export default {
     components: { Media },
 
     oncreate() {
-        const rounds = this.store.get('rounds');
+        const { rounds } = this.store.get();
 
         if (rounds.length < 1) {
             this.nextRound();
@@ -114,7 +114,7 @@ export default {
     },
 
     computed: {
-        totals: ($rounds) => totals($rounds)
+        totals: ({ $rounds }) => totals($rounds)
     },
 
     helpers: {
@@ -124,7 +124,7 @@ export default {
     methods: {
         nextRound() {
 
-            const {rounds, players} = this.store.get();
+            const { rounds, players } = this.store.get();
 
             const round = players.reduce((m, p) => {
                 m[p] = 0;
@@ -137,15 +137,16 @@ export default {
         },
 
         removeRound(index) {
-            const rounds = this.store.get('rounds')
-                .filter((r, i) => i !== index);
+            let { rounds } = this.store.get();
+            
+            rounds = rounds.filter((r, i) => i !== index);
 
             this.store.set({ rounds });
         },
 
         updateScore(e, player, index) {
 
-            const rounds = this.store.get('rounds');
+            const { rounds } = this.store.get();
             const value = +e.target.value;
 
             const updated = rounds.map((round, i) => {
